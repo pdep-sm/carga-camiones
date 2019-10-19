@@ -1,0 +1,54 @@
+import camion.*
+import estado.*
+import coso.*
+
+describe "tests de Camiones" {
+	
+	const camion1 = new Camion(cargaMaxima = 20, estado = disponible)
+	const caja10 = new Caja(peso = 10, elemento = "ketchup")
+	const caja8 = new Caja(peso = 8, elemento = "ketchup")
+	const caja21 = new Caja(peso = 21, elemento = "atun")
+ 
+	fixture {		 
+		camion1.cargar(caja10)
+	}
+
+	
+	test "puede cargar caja" {
+		assert.that(camion1.puedeCargar(caja8))
+	}
+	
+	test "no puede carga caja" {
+		assert.that(!camion1.puedeCargar(caja21))
+	}	
+	
+	test "no esta listo para salir por peso" {
+		assert.that(!camion1.estaListo())
+	}
+	
+	test "esta cargando" {
+		assert.that(camion1.estaCargando())
+	}
+	
+	test "esta listo para salir" {
+		camion1.cargar(caja8)
+		assert.that(camion1.estaListo())
+	}
+	
+	test "no esta listo para salir por estado" {
+		camion1.cargar(caja8)
+		camion1.reparar()
+		assert.that(!camion1.estaListo())
+	}
+	
+	test "elementos en el camion" {
+		camion1.cargar(caja8)
+		assert.equals(#{"ketchup"}, camion1.elementosCargados())
+	}
+	
+	test "tiene ketchup" {
+		assert.that(camion1.tiene("ketchup"))
+	}
+
+
+}
