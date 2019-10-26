@@ -9,19 +9,19 @@ class Estado {
 	}
 	
 	method salirDeReparacion(camion) {
-		self.error("Imposible salir de Reparación")
+		throw new CambioDeEstadoInvalidoException(message = "Imposible salir de Reparación")
 	}
 	
 	method reparar(camion) {
-		self.error("Imposible entrar en Reparación")
+		throw new CambioDeEstadoInvalidoException(message = "Imposible entrar en Reparación")
 	}
 	
 	method salirDeViaje(camion) {
-		self.error("Imposible salir de Viaje")
+		throw new CambioDeEstadoInvalidoException(message = "Imposible salir de Viaje")
 	}
 	
 	method finalizarViaje(camion) {
-		self.error("Imposible Finalizar Viaje")
+		throw new CambioDeEstadoInvalidoException(message = "Imposible Finalizar Viaje")
 	}
 }
 
@@ -56,3 +56,14 @@ object enReparacion inherits Estado {
 	}	
 	
 }
+
+
+class CambioDeEstadoInvalidoException inherits Exception {}
+
+
+
+
+
+
+
+

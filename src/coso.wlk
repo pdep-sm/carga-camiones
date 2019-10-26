@@ -7,12 +7,14 @@ class Bulto {
 	
 	method elemento() = caja.elemento()		
 	
+	method temperaturaMaxima() = caja.temperaturaMaxima()
 }
 
 
 class Caja {
 	const property peso
 	const property elemento
+	const property temperaturaMaxima
 	
 }
 
@@ -21,6 +23,7 @@ class Bidon {
 	const litros
 	const densidad
 	const property elemento
+	const property temperaturaMaxima
 	
 	method peso() = litros * densidad
 }

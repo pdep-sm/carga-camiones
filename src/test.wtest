@@ -5,9 +5,9 @@ import coso.*
 describe "tests de Camiones" {
 	
 	const camion1 = new Camion(cargaMaxima = 20, estado = disponible)
-	const caja10 = new Caja(peso = 10, elemento = "ketchup")
-	const caja8 = new Caja(peso = 8, elemento = "ketchup")
-	const caja21 = new Caja(peso = 21, elemento = "atun")
+	const caja10 = new Caja(peso = 10, elemento = "ketchup", temperaturaMaxima = 30)
+	const caja8 = new Caja(peso = 8, elemento = "ketchup", temperaturaMaxima = 30)
+	const caja21 = new Caja(peso = 21, elemento = "atun", temperaturaMaxima = 15)
  
 	fixture {		 
 		camion1.cargar(caja10)
@@ -21,6 +21,10 @@ describe "tests de Camiones" {
 	test "no puede carga caja" {
 		assert.that(!camion1.puedeCargar(caja21))
 	}	
+	
+	test "falla al intentar cargar caja que no se puede cargar" {
+		assert.throwsExceptionLike(new AccionInvalidaException(message = "No se puede cargar el coso en el camion"), {camion1.cargar(caja21)})
+	}
 	
 	test "no esta listo para salir por peso" {
 		assert.that(!camion1.estaListo())

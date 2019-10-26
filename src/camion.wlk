@@ -5,8 +5,10 @@ class Camion {
 	var property estado
 	
 	method cargar(coso) {
-		if (self.puedeCargar(coso))
-			self.agregarCoso(coso)
+		if (!self.puedeCargar(coso))
+			throw new AccionInvalidaException(message = "No se puede cargar el coso en el camion")
+		
+		self.agregarCoso(coso)
 	}
 	
 	method agregarCoso(coso) {
@@ -51,3 +53,26 @@ class Camion {
 	}
 	
 }
+
+class CamionFrigorifico inherits Camion {
+	
+	override method puedeCargar(coso) =
+		super(coso) and self.cumpleTemperatura(coso)
+
+	method cumpleTemperatura(coso) =
+		coso.temperaturaMaxima() >= self.temperaturaMaxima()
+
+	method temperaturaMaxima() = camionFrigorifico.temperaturaMaxima()
+}
+
+object camionFrigorifico {
+	var property temperaturaMaxima
+}
+
+
+
+
+
+
+class AccionInvalidaException inherits Exception {}
+
